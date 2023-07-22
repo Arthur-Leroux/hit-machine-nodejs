@@ -28,8 +28,14 @@ const rl = readline.createInterface({
 
 rl.question('Que voulez vous ?', (answer) => {
         console.log(`Vous voulez ${answer} `);
-        if(answer === 'chante'){
+        if(answer === `chante`){
             console.log(`Je m'appelle Charlu, je m'appelle Lili, vous êtes chez O'clock.`);
+            rl.close();
+        }else if(answer === `classement`){
+            console.log(`Voici les 10 premier du hit parade ${hitParade.join('\n')}`);
+            rl.close();
+        }else if(answer === `quitter`){
+            rl.close();
         }
 });
 
