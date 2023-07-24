@@ -56,7 +56,7 @@ const hitParade = [
     },
 ];
 
-
+let songCount = 0;
 
 
 server.on(`request`, function (req, res) {
@@ -73,6 +73,7 @@ server.on(`request`, function (req, res) {
 
   switch (url) {
     case `/`:
+        songCount++;
       res.write(
         `Je m'appelle Charlu, je m'appelle Lili, vous êtes chez O'clock`
       );
@@ -89,7 +90,7 @@ server.on(`request`, function (req, res) {
       res.write(classementModifiee);
       break;
     case `/stats`:
-      res.write(`blabla`);
+      res.write(`La chanson a été écouté${songCount} fois`);
       break;
         default : 
         res.write(`Cette page n'est pas disponible`);
