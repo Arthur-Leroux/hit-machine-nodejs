@@ -1,18 +1,18 @@
-const http = require("http");
+    const http = require("http");
 
-const server = http.createServer();
-const fs = require('fs');
+    const server = http.createServer();
+    const fs = require("fs");
 
-const hitParade = [
+    const hitParade = [
     {
         position: 1,
         artist: `Jain`,
-        title: `Come`
+        title: `Come`,
     },
     {
         position: 2,
         artist: `Matt Simons`,
-        title: `Catch & Realease`
+        title: `Catch & Realease`,
     },
     {
         position: 3,
@@ -54,56 +54,74 @@ const hitParade = [
         artist: `Feder`,
         title: `Blind (feat. Emmi)`,
     },
-];
+    ];
 
-let songCount = 0;
+    let songCount = 0;
 
+    server.on(`request`, function (req, res) {
+    const url = req.url;
+    res.write(`<!DOCTYPE html>
+        <html lang="FR-fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Nodejs</title>
+            <style> p{
+                color: #26b72b;
+                
+            }
+            body{
 
-server.on(`request`, function (req, res) {
-  const url = req.url;
-  res.write(`<!DOCTYPE html>
-    <html lang="FR-fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nodejs</title>
-        <link href="/style.css" rel="stylesheet">
-    </head>
-    <body>`);
+            background-color: #FFFF99;
+            }
+            div{
+                color : black;
+                font-weight: bold;
+                font-size : 5em;
+            
 
-  switch (url) {
-    case `/`:
+            }
+            ul {
+                color : red;
+            }
+            </style>
+        </head>
+        <body>`);
+
+    switch (url) {
+        case `/`:
         songCount++;
-      res.write(
-        `Je m'appelle Charlu, je m'appelle Lili, vous êtes chez O'clock`
-      );
+        res.write(
+            `<p>Je m'appelle Charlu, je m'appelle Lili, vous êtes chez O'clock</p>`
+        );
 
-      break;
-    case `/classement`:
-        const classementModifiee = url.replace('/classement','');
-        for(let classement of hitParade){
+        break;
+        case `/classement`:
+        const classementModifiee = url.replace("/classement", "");
+        for (let classement of hitParade) {
             res.write(`<ul><li>Position :${classement.position} 
-           artist : ${classement.artist}\n title :${classement.title}</li>
-           </ul>`);
+            artist : ${classement.artist}\n title :${classement.title}</li>
+            </ul>`);
         }
-        
-      res.write(classementModifiee);
-      break;
-    case `/stats`:
-      res.write(`La chanson a été écouté${songCount} fois`);
-      break;
-        default : 
-        res.write(`Cette page n'est pas disponible`);
-  }
-  // default :
-  // res.write(`Cette page n'est pas disponible`)
 
-  res.write(`</body> </html>`);
-  res.end();
-});
+        res.write(classementModifiee);
+        break;
+        case `/stats`:
+        res.write(`La chanson a été écouté ${songCount} fois`);
+        break;
+        default:
+        res.write(`<div>  4O4 ERREUR</div>
+        <p> Cette page n'est pas disponible</p>`);
+    }
+    // default :
+    // res.write(`Cette page n'est pas disponible`)
 
-const PORT = 5000;
+    res.write(`</body> </html>`);
+    res.end();
+    });
 
-server.listen(PORT, function () {
-  console.log(`Listening on : http://localhost:${PORT}`);
-});
+    const PORT = 5000;
+
+    server.listen(PORT, function () {
+    console.log(`Listening on : http://localhost:${PORT}`);
+    });
