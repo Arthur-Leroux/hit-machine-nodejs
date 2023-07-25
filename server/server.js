@@ -54,7 +54,7 @@ server.on(`request`, function (req, res) {
     case `/classement`:
       //je la remplace par une string vide
       const classementModifiee = url.replace("/classement", "");
-      //je bouclr sur le tableau hitParade stocker dans './my-modules/hitParade'
+      //je boucle sur le tableau hitParade stocker dans './my-modules/hitParade'
       for (let classement of hitParade) {
         //et je créer une liste a puce désordonner
         res.write(`<ul>
